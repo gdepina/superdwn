@@ -7,12 +7,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import Template from './../template'
 
-import userRoutes from './routes/user.routes'
-import authRoutes from './routes/auth.routes'
-import shopRoutes from './routes/shop.routes'
-import productRoutes from './routes/product.routes'
-import orderRoutes from './routes/order.routes'
-
 // modules for server side rendering
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
@@ -21,8 +15,7 @@ import StaticRouter from 'react-router-dom/StaticRouter'
 
 import { SheetsRegistry } from 'react-jss/lib/jss'
 import JssProvider from 'react-jss/lib/JssProvider'
-import { MuiThemeProvider, createMuiTheme, createGenerateClassName } from 'material-ui/styles'
-import { blueGrey, lightGreen } from 'material-ui/colors'
+import { createGenerateClassName } from 'material-ui/styles'
 //end
 
 //comment out before building for production
@@ -47,45 +40,20 @@ app.use(cors())
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 // mount routes
-app.use('/', userRoutes)
-app.use('/', authRoutes)
-app.use('/', shopRoutes)
-app.use('/', productRoutes)
-app.use('/', orderRoutes)
+
 
 app.get('*', (req, res) => {
    const sheetsRegistry = new SheetsRegistry()
-   const theme = createMuiTheme({
-     palette: {
-       primary: {
-       light: '#8eacbb',
-       main: '#607d8b',
-       dark: '#34515e',
-       contrastText: '#fff',
-     },
-     secondary: {
-       light: '#e7ff8c',
-       main: '#b2ff59',
-       dark: '#7ecb20',
-       contrastText: '#000',
-     },
-       openTitle: blueGrey['400'],
-       protectedTitle: lightGreen['400'],
-       type: 'light'
-     }
-   })
    const generateClassName = createGenerateClassName()
    const context = {}
    const markup = ReactDOMServer.renderToString(<div>hola</div>)
 
-/*
+    /*
 ReactDOMServer.renderToString(
 
       <StaticRouter location={req.url} context={context}>
          <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
-            <MuiThemeProvider theme={theme} sheetsManager={new Map()}>
               <MainRouter/>
-            </MuiThemeProvider>
          </JssProvider>
       </StaticRouter>
      */

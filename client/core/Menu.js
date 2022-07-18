@@ -7,11 +7,13 @@ import HomeIcon from 'material-ui-icons/Home'
 import ExitToAppIcon from 'material-ui-icons/ExitToApp'
 import AccountCircleIcon from 'material-ui-icons/AccountCircle'
 import Button from 'material-ui/Button'
-import auth from './../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
 import CartIcon from 'material-ui-icons/ShoppingCart'
 import Badge from 'material-ui/Badge'
-import cart from './../cart/cart-helper'
+
+const auth = {
+    isAuthenticated: () => false,
+}
 
 const isActive = (history, path) => {
     if (history.location.pathname == path)
@@ -43,7 +45,7 @@ const Menu = withRouter(({history}) => (
                 {/*</Link>*/}
                 <Link to="/cart">
                     <Button style={isActive(history, "/cart")}>
-                        <Badge color="error" badgeContent={cart.itemTotal()}>
+                        <Badge color="error" badgeContent={0}>
                             <CartIcon/>
                         </Badge>
                     </Button>
