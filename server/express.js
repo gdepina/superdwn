@@ -20,6 +20,7 @@ import { createGenerateClassName } from 'material-ui/styles'
 
 //comment out before building for production
 import devBundle from './devBundle'
+import Product from "./controllers/product";
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
@@ -73,5 +74,7 @@ app.use((err, req, res, next) => {
     res.status(401).json({"error" : err.name + ": " + err.message})
   }
 })
+
+app.post('/api/products', Product.create);
 
 export default app
