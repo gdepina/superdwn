@@ -76,5 +76,6 @@ app.use((err, req, res, next) => {
 })
 
 app.post('/api/products', Product.create);
+app.put('/api/products', Product.update);
 
 export default app
