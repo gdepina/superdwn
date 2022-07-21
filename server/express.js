@@ -20,7 +20,7 @@ import { createGenerateClassName } from 'material-ui/styles'
 
 //comment out before building for production
 import devBundle from './devBundle'
-import Product from "./controllers/product";
+import ProductRoutes from './routes/product'
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
@@ -43,7 +43,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 // mount routes
 
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
    const sheetsRegistry = new SheetsRegistry()
    const generateClassName = createGenerateClassName()
    const context = {}
@@ -75,7 +75,8 @@ app.use((err, req, res, next) => {
   }
 })
 
-app.post('/api/products', Product.create);
-app.put('/api/products', Product.update);
+// module routes
+app.use('/', ProductRoutes);
+
 
 export default app
