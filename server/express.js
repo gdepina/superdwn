@@ -42,8 +42,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 // mount routes
 
-
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
    const sheetsRegistry = new SheetsRegistry()
    const generateClassName = createGenerateClassName()
    const context = {}
@@ -68,13 +67,15 @@ ReactDOMServer.renderToString(
     }))
 })
 
+// module routes
+
+app.use('/api/products', require('./routes/product'));
+
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).json({"error" : err.name + ": " + err.message})
   }
 })
-
-app.post('/api/products', Product.create);
 
 export default app
