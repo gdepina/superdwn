@@ -6,22 +6,22 @@ const schema = new Schema({
   name: {
     type: String,
     trim: true,
-    required: "El nombre es requerido",
+    required: 'El nombre es requerido',
   },
   category: {
     type: String,
     trim: true,
-    required: "La categoria es requerida",
+    required: 'La categoria es requerida',
   },
   desc: {
     type: String,
     trim: true,
-    required: "La descripcion es requerida",
+    required: 'La descripcion es requerida',
   },
   price: {
     type: Number,
     trim: true,
-    required: "El precio es requerido",
+    required: 'El precio es requerido',
   },
   discount_percentage: {
     type: Number,
@@ -34,11 +34,11 @@ const schema = new Schema({
   stock: {
     type: Number,
     trim: true,
-    required: "El stock es requerido",
+    required: 'El stock es requerido',
   },
   img: String,
 });
 
-const Product = mongoose.model("Product", schema);
+const Product = mongoose.model('Product', schema);
 
 export default Product;
