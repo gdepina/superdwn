@@ -36,6 +36,7 @@ const schema = new Schema({
     },
 })
 
+
 const User = mongoose.model('User', schema);
 
 
