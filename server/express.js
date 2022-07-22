@@ -78,5 +78,4 @@ app.use((err, req, res, next) => {
 // module routes
 app.use('/', ProductRoutes);
 
-
 export default app
