@@ -1,4 +1,4 @@
-import ProductModel from "../models/Product";
+import ProductModel from '../models/Product';
 
 const list = (req, res) => {
   //logic for get a list of all products from mongodb here
