@@ -21,7 +21,7 @@ const schema = new Schema({
         type: String,
         trim: true,
         required: 'Se requiere email',
-        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+        match: [/.+\@.+\..+/, 'Por favor introduzca una direccion de email valida'],
     },
     userName:{
         type: String,
