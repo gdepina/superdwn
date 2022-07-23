@@ -14,21 +14,29 @@ const schema = new Schema({
         required: 'El apellido es requerido'
     },
     birthDate: {
-        type: String,
+        type: Date,
         required: 'Se requiere fecha de nacimiento'
     },
     email:{
         type: String,
         trim: true,
-        required: 'Se requiere email'
+        required: 'Se requiere email',
+        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
     },
     userName:{
         type: String,
         trim: true,
         required: 'Se requiere nombre de usuario'
     },
-    userType:{
-        type: Number,
+    password:{
+        type: String,
+        trim: true,
+        required: 'Se requiere contraseña'
+    },
+    userType : {
+        type: String,
+        default: 'comprador',
+        enum: ['comprador' , 'empleado', 'manager']
     },
     avatar:{
         type: String,
