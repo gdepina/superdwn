@@ -20,9 +20,7 @@ import { createGenerateClassName } from 'material-ui/styles'
 
 //comment out before building for production
 import devBundle from './devBundle'
-
-import ProductRoutes from "./routes/product";
-import UserRoutes from "./routes/user";
+import ProductRoutes from './routes/product'
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
@@ -76,10 +74,8 @@ app.use((err, req, res, next) => {
     res.status(401).json({"error" : err.name + ": " + err.message})
   }
 })
-// Module routes
 
-
-app.use('/', ProductRoutes)
-app.use('/', UserRoutes)
+// module routes
+app.use('/', ProductRoutes);
 
 export default app
