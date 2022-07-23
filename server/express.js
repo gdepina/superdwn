@@ -20,6 +20,7 @@ import { createGenerateClassName } from 'material-ui/styles'
 
 //comment out before building for production
 import devBundle from './devBundle'
+
 import ProductRoutes from "./routes/product";
 import UserRoutes from "./routes/user";
 
@@ -76,6 +77,7 @@ app.use((err, req, res, next) => {
   }
 })
 // Module routes
+
 
 app.use('/', ProductRoutes)
 app.use('/', UserRoutes)
