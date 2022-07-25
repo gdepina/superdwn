@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
-const { appConfig } = require('../../config')
 
 const schema = new Schema({
   name: {

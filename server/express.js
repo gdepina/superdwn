@@ -12,10 +12,6 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import MainRouter from './../client/MainRouter'
 import StaticRouter from 'react-router-dom/StaticRouter'
-
-import { SheetsRegistry } from 'react-jss/lib/jss'
-import JssProvider from 'react-jss/lib/JssProvider'
-import { createGenerateClassName } from 'material-ui/styles'
 //end
 
 //comment out before building for production
@@ -46,28 +42,15 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 
 app.get('/', (req, res) => {
-   const sheetsRegistry = new SheetsRegistry()
-   const generateClassName = createGenerateClassName()
-   const context = {}
    const markup = ReactDOMServer.renderToString(<div>hola</div>)
 
     /*
 ReactDOMServer.renderToString(
-
       <StaticRouter location={req.url} context={context}>
-         <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
               <MainRouter/>
-         </JssProvider>
       </StaticRouter>
      */
-    if (context.url) {
-      return res.redirect(303, context.url)
-    }
-    const css = sheetsRegistry.toString()
-    res.status(200).send(Template({
-      markup: markup,
-      css: css
-    }))
+    res.status(200).send(Template({markup: markup}))
 })
 
 // Catch unauthorised errors
