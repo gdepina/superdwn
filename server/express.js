@@ -11,7 +11,6 @@ import Template from './../template'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import MainRouter from './../client/MainRouter'
-import StaticRouter from 'react-router-dom/StaticRouter'
 //end
 
 //comment out before building for production

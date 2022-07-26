@@ -7,7 +7,6 @@ const config = {
     mode: "development",
     devtool: 'eval-source-map',
     entry: [
-        'react-hot-loader/patch',
         'webpack-hot-middleware/client?reload=true',
         path.join(CURRENT_WORKING_DIR, 'client/main.js')
     ],
