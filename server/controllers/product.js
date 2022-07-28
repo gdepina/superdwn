@@ -1,3 +1,4 @@
+import Product from '../models/Product';
 import ProductModel from '../models/Product';
 
 const list = (req, res) => {
@@ -22,6 +23,14 @@ const update = (req, res) => {
   res.status(200);
 };
 
+const categories = (req, res) => {
+  ProductModel.distinct('category', function (err, result) {
+    err && res.status(500).json(err);
+    res.status(200).json(result)
+    
+  })
+};
+
 const destroyAss = (req, res) => {
   ProductModel.findOneAndRemove({ name: req.body.name }, (err) =>
     res.status(500).json(err)
@@ -33,5 +42,6 @@ export default {
   list,
   create,
   update,
+  categories,
   destroyAss,
 };
