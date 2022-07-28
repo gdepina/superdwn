@@ -22,11 +22,13 @@ const schema = new Schema({
         trim: true,
         required: 'Se requiere email',
         match: [/.+\@.+\..+/, 'Por favor introduzca una direccion de email valida'],
+        unique: true,
     },
     userName:{
         type: String,
         trim: true,
-        required: 'Se requiere nombre de usuario'
+        required: 'Se requiere nombre de usuario',
+        unique: true
     },
     password:{
         type: String,
