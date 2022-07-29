@@ -35,7 +35,10 @@ const schema = new Schema({
     trim: true,
     required: 'El stock es requerido',
   },
-  img: String,
+  img: {
+    data: Buffer,
+    contentType: String
+  },
 });
 
 const Product = mongoose.model('Product', schema);
