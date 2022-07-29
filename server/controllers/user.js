@@ -5,9 +5,16 @@ const create = (req, res) => {
     res.status(200);
 }
 
+const find = (req, res) => {
+    const userName = req.params.userName
+    UserModel.findOne({userName}, ['name', 'surname', 'email'], (err, user) => {
+        if (err) res.json(err)
+        !user ? res.status(404).send('no existe el usuario') : res.json(user)
+    })
+}
 
 
 export default {
-    create,   
-
+    find,
+    create,
 }
