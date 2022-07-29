@@ -1,14 +1,33 @@
-import ProductModel from '../models/Product';
+import { query } from "express";
+import { reset } from "nodemon";
+import ProductModel from "../models/Product";
 
 const list = (req, res) => {
-  //logic for get a list of all products from mongodb here
-  const products = [
-    { id: 1, name: 'computadora noganet' },
-    { id: 2, name: 'mouse steelseries' },
-    { id: 3, name: 'monitor benq' },
-  ];
-  res.send(products);
+  const name = req.query.name;
+  const category = req.query.category;
+  let query = {};
+
+
+  if (category) {
+      query.category = category
+  }
+
+  if (name) {
+      query.name = {$regex: `(.*)${name}(.*)`}
+  }
+
+  ProductModel.find(query)
+      .then((products) => {
+          res.status(200).json(products);
+      })
+      .catch((error) => {
+          res.json(error);
+      });
 };
+
+
+
+
 
 const create = (req, res) => {
   ProductModel.create(req.body, (err) => res.status(500).json(err));
