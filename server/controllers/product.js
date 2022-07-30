@@ -3,13 +3,20 @@ import Formidable from "formidable";
 import fs from "fs";
 
 const list = (req, res) => {
-    //logic for get a list of all products from mongodb here
-    const products = [
-        { id: 1, name: "computadora noganet" },
-        { id: 2, name: "mouse steelseries" },
-        { id: 3, name: "monitor benq" },
-    ];
-    res.send(products);
+  const { name, category } = req.query;
+
+  let query = {};
+
+  if (category) query.category = category
+  if (name) query.name = {$regex: `(.*)${name}(.*)`}
+
+  ProductModel.find(query)
+      .then((products) => {
+          res.status(200).json(products);
+      })
+      .catch((error) => {
+          res.json(error);
+      });
 };
 
 const create = (req, res) => {
