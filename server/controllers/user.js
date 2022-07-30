@@ -17,7 +17,6 @@ const create = (req, res) => {
             user.avatar.data = fs.readFileSync(files.avatar.path)
             user.avatar.contentType = files.avatar.type
         }
-        console.log(files)
         user.save((err, user) => {
             if (err) {
                 return res.status(400).json(err)
