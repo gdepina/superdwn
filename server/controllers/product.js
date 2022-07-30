@@ -1,20 +1,12 @@
-import { query } from "express";
-import { reset } from "nodemon";
 import ProductModel from "../models/Product";
 
 const list = (req, res) => {
-  const name = req.query.name;
-  const category = req.query.category;
+  const { name, category } = req.query;
+
   let query = {};
 
-
-  if (category) {
-      query.category = category
-  }
-
-  if (name) {
-      query.name = {$regex: `(.*)${name}(.*)`}
-  }
+  if (category) query.category = category
+  if (name) query.name = {$regex: `(.*)${name}(.*)`}
 
   ProductModel.find(query)
       .then((products) => {
