@@ -1,12 +1,14 @@
 import express from 'express';
-import auth from '../controllers/auth';
-import UserController from '../controllers/user';
+import Auth from '../controllers/auth';
+import User from '../controllers/user';
 
 
 const router = express.Router();
 
-router.post('/api/users', UserController.create);
+router.post('/api/user', User.create);
+router.post('/api/login', Auth.login);
 
-router.post('/api/login',auth.login);
+router.get('/api/user/profile/', Auth.isLogged, User.find)
+router.get('/api/user/profile/:userName', Auth.isLogged, User.find)
 
 export default router;

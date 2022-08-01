@@ -28,10 +28,10 @@ const isLogged = (req, res, next) => {
 
 	UserModel.findOne({ _id: token })
 		.then((user) => {
-			user ? next() : res.status(403).json('no tenes permisos');
+			user ? next() : res.status(403).json({message: 'se necesita proporcionar un token valido en la peticion'});
 		})
-		.catch((error) => {
-			res.status(500).json(error);
+		.catch((err) => {
+            if (err) res.status(500).json({message: "internal server error"})
 		})
 }
 
