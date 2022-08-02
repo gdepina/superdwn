@@ -18,6 +18,7 @@ import devBundle from './devBundle'
 
 import ProductRoutes from "./routes/product";
 import UserRoutes from "./routes/user";
+import OrderRoutes from "./routes/order";
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
@@ -63,5 +64,6 @@ app.use((err, req, res, next) => {
 
 app.use('/', ProductRoutes)
 app.use('/', UserRoutes)
+app.use('/', OrderRoutes)
 
 export default app
