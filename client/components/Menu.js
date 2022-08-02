@@ -6,8 +6,8 @@ import {
 } from '@tabler/icons';
 
 const mockdata = [
-  { label: 'Productos', icon: IconHome },
-  { label: 'Carrito', icon: IconShoppingCart },
+  { label: 'Productos', icon: <IconHome />},
+  { label: 'Carrito', icon: <IconShoppingCart /> },
 ];
 
 const useStyles = createStyles((theme) => ({
