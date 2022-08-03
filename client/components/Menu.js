@@ -6,8 +6,9 @@ import {
 } from '@tabler/icons';
 
 const mockdata = [
-  { label: 'Productos', icon: <IconHome />},
+  { label: 'Productos', icon: <IconHome/>},
   { label: 'Carrito', icon: <IconShoppingCart /> },
+  { label: 'Registrarse', icon: <IconShoppingCart /> }
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -50,7 +51,7 @@ export function NavbarNested() {
   const { classes } = useStyles();
   const links = mockdata.map((item) => <NavLink {...item} key={item.label} />);
   return (
-    <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
+    <Navbar height={870} width={{ sm: 250 }} p="md" className={classes.navbar}>
       {/* <Navbar.Section className={classes.header}>
         <Group position="apart">
           <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
@@ -62,7 +63,7 @@ export function NavbarNested() {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        porongo gordo y pequeño
+        
       </Navbar.Section>
     </Navbar>
   );
