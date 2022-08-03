@@ -16,8 +16,11 @@ import MainRouter from './../client/MainRouter'
 //comment out before building for production
 import devBundle from './devBundle'
 
+//Module Routes
 import ProductRoutes from "./routes/product";
 import UserRoutes from "./routes/user";
+import OrderRoutes from "./routes/order";
+
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
@@ -27,7 +30,7 @@ devBundle.compile(app)
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(compress())
 // secure apps by setting various HTTP headers
@@ -41,7 +44,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 
 app.get('/', (req, res) => {
-   const markup = ReactDOMServer.renderToString(<div>hola</div>)
+    const markup = ReactDOMServer.renderToString(<div>hola</div>)
 
     /*
 ReactDOMServer.renderToString(
@@ -52,16 +55,16 @@ ReactDOMServer.renderToString(
     res.status(200).send(Template({markup: markup}))
 })
 
-// Catch unauthorised errors
-app.use((err, req, res, next) => {
-  if (err.name === 'UnauthorizedError') {
-    res.status(401).json({"error" : err.name + ": " + err.message})
-  }
-})
-// Module routes
-
-
 app.use('/', ProductRoutes)
 app.use('/', UserRoutes)
+app.use('/', OrderRoutes)
+
+// Catch unauthorised errors
+app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).json({"error": err.name + ": " + err.message})
+    }
+})
+
 
 export default app
