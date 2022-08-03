@@ -3,38 +3,76 @@ import mongoose from 'mongoose';
 
 const {Schema} = mongoose;
 
-const schema = new Schema({
-    user: {
-        type: String,
-        trim: true,
-        required: 'El username es requerido',
-    },
-    products: {
-        type: [String],
-        trim: true,
-        validate: {
-            validator: (products) => {
-                if (products.length !== 0) return true
-                return false
-            },
-            message: 'Es necesario proporcionar array con productos'
+const orderStatus = {
+    STARTED: 'Iniciada',
+    PROCESSING: 'Procesando',
+    DELIVERED: 'Enviada',
+    COMPLETED: 'Completada'
+}
+
+const paymentTypes = {
+    CASH: 'Efectivo',
+    DEBIT: 'Tarjeta de debito',
+    CREDIT: 'Tarjeta de credito'
+}
+
+
+const OrderItemSchema = new Schema({
+        product: {
+            type: Schema.ObjectId,
+            ref: 'Product',
+            required: 'Se requiere id del producto'
+        },
+        quantity: {
+            type: Number,
+            min: 1,
+            max: 100,
+            required: 'Se requiere cantidad'
         }
     },
-    status: {
-        type: String,
-        default: 'iniciado',
-        required: 'Se requiere status del pedido'
+    {_id: false, versionKey: false}
+);
+
+const OrderSchema = new Schema({
+        user: {
+            type: Schema.ObjectId,
+            ref: 'User',
+            required: 'El user es requerido'
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
+        address: {
+            type: String,
+            trim: true,
+            required: 'Se requiere una direccion'
+        },
+        status: {
+            type: String,
+            enum: Object.keys(orderStatus)
+        },
+        paymentType: {
+            type: String,
+            required: 'Se requiere un metodo de pago',
+            enum: Object.keys(paymentTypes)
+        },
+        products: {
+            type: [OrderItemSchema],
+            validate: {
+                validator: products => Boolean(products[0]),
+                message: 'Se requiere enviar al menos 1 producto'
+            }
+        }
     },
-    payment: {
-        type: String,
-        default: "contado",
-        trim: true,
-        required: 'Se requiere un metodo de pago para el pedido'
-    }
-})
+    {versionKey: false}
+);
+
+const model = mongoose.model('Order', OrderSchema);
 
 
-const Order = mongoose.model('Order', schema);
-
-
-export default Order;
+export default {
+    orderStatus,
+    paymentTypes,
+    model
+}
