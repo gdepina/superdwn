@@ -1,19 +1,27 @@
-import React from 'react'
-import { Navbar, Group, Code, ScrollArea, createStyles, NavLink } from '@mantine/core';
+import React from "react";
 import {
-  IconHome,
-  IconShoppingCart,
-} from '@tabler/icons';
+  Navbar,
+  Container,
+  ScrollArea,
+  createStyles,
+  NavLink,
+  Button,
+  Group,
+  Avatar,
+  Text,
+  Space,
+} from "@mantine/core";
+import { IconHome, IconShoppingCart } from "@tabler/icons";
 
 const mockdata = [
-  { label: 'Productos', icon: <IconHome/>},
-  { label: 'Carrito', icon: <IconShoppingCart /> },
-  { label: 'Registrarse', icon: <IconShoppingCart /> }
+  { label: "Productos", icon: <IconHome /> },
+  { label: "Carrito", icon: <IconShoppingCart /> },
 ];
 
 const useStyles = createStyles((theme) => ({
   navbar: {
-    backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
   },
 
@@ -22,9 +30,9 @@ const useStyles = createStyles((theme) => ({
     paddingTop: 0,
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
-    color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
     borderBottom: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
 
@@ -42,7 +50,7 @@ const useStyles = createStyles((theme) => ({
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
     borderTop: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
+      theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
     }`,
   },
 }));
@@ -51,7 +59,7 @@ export function NavbarNested() {
   const { classes } = useStyles();
   const links = mockdata.map((item) => <NavLink {...item} key={item.label} />);
   return (
-    <Navbar height={870} width={{ sm: 250 }} p="md" className={classes.navbar}>
+    <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
       {/* <Navbar.Section className={classes.header}>
         <Group position="apart">
           <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
@@ -63,7 +71,14 @@ export function NavbarNested() {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        
+        <Container p="xl" align="center" pb="xs">
+          <Button size="xs" mr="xl">
+            Iniciar Sesion
+          </Button>
+          <Button size="xs">
+            Registrarse
+          </Button>
+        </Container>
       </Navbar.Section>
     </Navbar>
   );
