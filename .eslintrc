@@ -4,6 +4,8 @@
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }]
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "consistent-return": "off",
+    "no-unused-expressions": ["error", {"allowShortCircuit": true, "allowTernary": true}],
   }
 }

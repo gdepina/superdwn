@@ -1,19 +1,22 @@
-import config from './../config/config'
-import app from './express'
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import config from '../config/config';
+import app from './express';
 
 // Connection URL
 
-mongoose.Promise = global.Promise
-mongoose.connect(config.mongoUri)
-mongoose.connection.on('connected', () => { console.info('Broder la conexion a la base es un exito') })
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoUri);
+mongoose.connection.on('connected', () => {
+  console.info('Broder la conexion a la base es un exito');
+});
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`)
-})
+  // eslint-disable-next-line no-undef
+  throw new Error(`unable to connect to database: ${mongoUri}`);
+});
 
 app.listen(config.port, (err) => {
   if (err) {
-    console.log(err)
+    console.log(err);
   }
-  console.info('Server started on port %s.', config.port)
-})
+  console.info('Server started on port %s.', config.port);
+});

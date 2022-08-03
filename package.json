@@ -19,7 +19,8 @@
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
     "start": "NODE_ENV=production node $NODE_DEBUG_OPTION ./dist/server.generated.js",
     "start-dev": "webpack --mode=development --config webpack.config.server.js && node --inspect ./dist/server.generated.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint":  "eslint --ext .js ./"
   },
   "lint-staged": {
     "*.js": ["eslint", "prettier --write"]

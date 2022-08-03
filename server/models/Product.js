@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const { Schema } = mongoose;
 
 const schema = new Schema({
@@ -37,7 +38,7 @@ const schema = new Schema({
   },
   img: {
     data: Buffer,
-    contentType: String
+    contentType: String,
   },
 });
 
