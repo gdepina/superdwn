@@ -1,12 +1,8 @@
-import React from 'react'
-import { hydrateRoot, createRoot } from 'react-dom/client'
-import App from './App'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
 
+// eslint-disable-next-line no-undef
+const root = createRoot(document.getElementById('root'));
 
-const root = createRoot(
-    document.getElementById("root")
-);
-
-root.render(<App/>)
-
-//hydrateRoot(App, document.getElementById('root'))
+root.render(<App />);
