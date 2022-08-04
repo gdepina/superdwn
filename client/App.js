@@ -5,7 +5,7 @@ import { MantineProvider } from '@mantine/core';
 
 
 const App = () => (
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'dark' }}>
+    <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
         <BrowserRouter>
             <MainRouter/>
         </BrowserRouter>
