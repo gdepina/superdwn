@@ -5,7 +5,7 @@ import {NavbarNested} from './components/Menu'
 function MainRouter() {
         return (
             <Routes>              
-                <Route path="/" element={<NavbarNested/>}/>
+                <Route path="/" element={<NavbarNested isLogged={true} />}/>
             </Routes>
         )
 }

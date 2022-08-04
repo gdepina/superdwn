@@ -55,11 +55,22 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function NavbarNested() {
+const onClickLogIn = () => {
+  
+  return 
+};
+
+
+
+
+export function NavbarNested(props) {
   const { classes } = useStyles();
   const links = mockdata.map((item) => <NavLink {...item} key={item.label} />);
-  return (
-    <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
+    const isLogged = props.isLogged;
+  
+    if (isLogged) {
+      return (
+        <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
       {/* <Navbar.Section className={classes.header}>
         <Group position="apart">
           <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
@@ -72,14 +83,38 @@ export function NavbarNested() {
 
       <Navbar.Section className={classes.footer}>
         <Container p="xl" align="center" pb="xs">
-          <Button size="xs" mr="xl">
+          <Button size="xs" mr="xl" onClick={onClickLogIn}>
             Iniciar Sesion
           </Button>
           <Button size="xs">
             Registrarse
           </Button>
         </Container>
+
       </Navbar.Section>
     </Navbar>
-  );
+
+      );
+    }
+    return <Navbar width={{ sm: 300 }} p="md" className={classes.navbar}>
+    {/* <Navbar.Section className={classes.header}>
+      <Group position="apart">
+        <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+      </Group>
+    </Navbar.Section> */}
+
+    <Navbar.Section grow className={classes.links} component={ScrollArea}>
+      <div className={classes.linksInner}>{links}</div>
+    </Navbar.Section>
+
+    <Navbar.Section className={classes.footer}>
+      <Container p="xl" align="center" pb="xs">
+        Que pasa teo no te salio pa?
+      </Container>
+
+    </Navbar.Section>
+  </Navbar>
+  
 }
+
+
