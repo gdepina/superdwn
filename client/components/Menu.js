@@ -51,12 +51,17 @@ const useStyles = createStyles((theme) => ({
 		borderTop: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[4] : theme.colors.gray[3]
 			}`,
 	},
+	
+	navlink: {
+		'&:hover':{backgroundColor: theme.colors.dark[4]}
+
+	}
 }));
 
 export function NavbarNested(props) {
 	const { classes } = useStyles();
 	const [isLogged, setisLogged] = useState(1);
-	const links = mockdata.map((item) => <NavLink {...item} key={item.label} />);
+	const links = mockdata.map((item) => <NavLink {...item} key={item.label} className={classes.navlink} />);
 
 	if (isLogged) {
 		return (
