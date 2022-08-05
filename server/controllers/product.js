@@ -43,6 +43,7 @@ const create = (req, res) => {
 };
 
 const update = (req, res) => {
+  // eslint-disable-next-line max-len
   ProductModel.findOneAndUpdate({ name: req.body.name }, req.body, (err) => res.status(500).json(err));
   res.status(200);
 };

@@ -1,11 +1,11 @@
 {
-  "extends": ["airbnb", "airbnb/hooks", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["airbnb", "airbnb/hooks"],
+  "plugins": [],
   "rules": {
-    "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "consistent-return": "off",
     "no-unused-expressions": ["error", {"allowShortCircuit": true, "allowTernary": true}],
+    "no-underscore-dangle": "off"
   }
 }
