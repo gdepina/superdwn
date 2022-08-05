@@ -40,14 +40,14 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
 
 // mount routes
 
-app.get('/', (req, res) => {
-  const markup = ReactDOMServer.renderToString(<div>hola</div>);
-  res.status(200).send(Template({ markup }));
-});
-
 app.use('/', ProductRoutes);
 app.use('/', UserRoutes);
 app.use('/', OrderRoutes);
+
+app.get('*', (req, res) => {
+  const markup = ReactDOMServer.renderToString(<div>hola</div>);
+  res.status(200).send(Template({ markup }));
+});
 
 // Catch unauthorised errors
 app.use((err, req, res, next) => {
