@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Navbar, Container, ScrollArea, NavLink, Button, Group, Avatar, Text, UnstyledButton,
 } from '@mantine/core';
 import { IconHome, IconShoppingCart } from '@tabler/icons';
 import { Link, useLocation } from 'react-router-dom';
 import menuJss from './menu-jss';
+import { LoginContext } from '../context/LoginProvider';
 
 const menuOptions = [
   { label: 'Productos', icon: <IconHome />, to: '/' },
@@ -12,10 +13,10 @@ const menuOptions = [
 ];
 
 const logIn = (opts) => {
-  const { setisLogged } = opts;
+  const { setIsLogged, loginStates } = opts;
   return (
     <Container p="xl" align="center" pb="xs">
-      <Button size="xs" mr="xl" onClick={() => setisLogged(0)}>
+      <Button size="xs" mr="xl" onClick={() => setIsLogged(loginStates.LOGGED)}>
         Iniciar Sesion
       </Button>
       <Button size="xs">Registrarse</Button>
@@ -24,7 +25,7 @@ const logIn = (opts) => {
 };
 
 const loggedIn = (opts) => {
-  const { setisLogged } = opts;
+  const { setIsLogged, loginStates } = opts;
   return (
     <Container p="xl" align="center" pb="xs">
       <UnstyledButton py="xl">
@@ -40,7 +41,7 @@ const loggedIn = (opts) => {
           </div>
         </Group>
       </UnstyledButton>
-      <Button size="xs" mr="xl" onClick={() => setisLogged(1)}>
+      <Button size="xs" mr="xl" onClick={() => setIsLogged(loginStates.LOGGED_OUT)}>
         Salir
       </Button>
     </Container>
@@ -48,9 +49,10 @@ const loggedIn = (opts) => {
 };
 
 const Menu = () => {
+  const { isLogged, setIsLogged, loginStates } = React.useContext(LoginContext);
   const { classes } = menuJss();
   const location = useLocation();
-  const [isLogged, setisLogged] = useState(1);
+
   const navLinks = menuOptions.map((item) => (
     <NavLink
       {...item}
@@ -62,7 +64,7 @@ const Menu = () => {
   ));
 
   const opts = {
-    classes, setisLogged, navLinks, location,
+    classes, setIsLogged, isLogged, loginStates, navLinks, location,
   };
 
   const {
