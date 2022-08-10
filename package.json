@@ -63,6 +63,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@mantine/core": "^5.0.2",
+    "@mantine/form": "^5.1.0",
     "@mantine/hooks": "^5.0.2",
     "@tabler/icons": "^1.78.1",
     "body-parser": "1.18.2",
