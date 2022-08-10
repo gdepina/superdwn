@@ -5,11 +5,10 @@ import useStyles from './ProductsCard-jss';
 
 const ProductCard = ({ product }) => {
   const { classes } = useStyles();
-
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" />
+        <Image src={product.img} alt="product image" />
       </Card.Section>
 
       <Group position="apart">
