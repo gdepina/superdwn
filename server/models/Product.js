@@ -37,8 +37,7 @@ const schema = new Schema({
     required: 'El stock es requerido',
   },
   img: {
-    data: Buffer,
-    contentType: String,
+    data: String,
   },
 });
 

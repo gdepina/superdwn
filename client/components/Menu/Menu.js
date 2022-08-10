@@ -18,34 +18,19 @@ import { Link, useLocation } from 'react-router-dom';
 import menuJss from './menu-jss';
 import { signIn } from './login-api';
 
-const submitSignIn = (opts) => {
-  signIn(opts.user).then((result) => {
-    opts.setProfile({ user: result.user });
-  });
-};
-
 const menuOptions = [
   { label: 'Productos', icon: <IconHome />, to: '/' },
   { label: 'Carrito', icon: <IconShoppingCart />, to: '/cart' },
 ];
 
 const logIn = (opts) => {
-  const { setProfile, profile } = opts;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const form = useForm({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    },
-  });
+  const {
+    setProfile, profile, executeLogIn, form,
+  } = opts;
   return (
     <Container p="xl" align="center" pb="xs">
-      <Modal centered opened={profile.opened} onClose={() => setProfile({ opened: false })} title="Inicia Sesion">
-        <form onSubmit={form.onSubmit((values) => submitSignIn({ user: values, setProfile }))}>
+      <Modal centered opened={profile.opened} onClose={() => setProfile({ opened: false, user: {} })} title="Inicia Sesion">
+        <form onSubmit={form.onSubmit((values) => executeLogIn(values))}>
           <TextInput required label="Email" placeholder="your@email.com" {...form.getInputProps('email')} />
           <TextInput required label="Contraseña" placeholder="Contraseña" {...form.getInputProps('password')} />
 
@@ -63,18 +48,22 @@ const logIn = (opts) => {
 };
 
 const loggedIn = (opts) => {
-  const { setProfile } = opts;
+  const { setProfile, profile } = opts;
+  const {
+    email, userName, name, surname,
+  } = profile.user;
   return (
     <Container p="xl" align="center" pb="xs">
       <UnstyledButton py="xl">
         <Group>
           <Avatar size={40} color="blue">
-            JG
+            {name.charAt(0).toUpperCase()}
+            {surname.charAt(0).toUpperCase()}
           </Avatar>
           <div>
-            <Text>Gordo TFT</Text>
+            <Text>{userName}</Text>
             <Text size="xs" mr="xl" color="dimmed">
-              jonhgraves@gilmail.com
+              {email}
             </Text>
           </div>
         </Group>
@@ -93,6 +82,23 @@ const Menu = () => {
     user: {},
     opened: false,
   });
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+
+  const executeLogIn = (data) => {
+    signIn(data).then((result) => {
+      setProfile({ user: result.user, opened: false });
+    }).catch((err) => console.log(err));
+  };
+
   const navLinks = menuOptions.map((item) => (
     <NavLink
       {...item}
@@ -109,6 +115,8 @@ const Menu = () => {
     navLinks,
     location,
     profile,
+    executeLogIn,
+    form,
   };
 
   const {
