@@ -1,56 +1,34 @@
-import React, { useState } from 'react';
-import {
-  Navbar, Container, ScrollArea, NavLink, Button, Group, Avatar, Text, UnstyledButton,
-} from '@mantine/core';
+import React, { useState, useContext } from 'react';
+import { Navbar, NavLink, ScrollArea } from '@mantine/core';
+import { useForm } from '@mantine/form';
 import { IconHome, IconShoppingCart } from '@tabler/icons';
 import { Link, useLocation } from 'react-router-dom';
 import menuJss from './menu-jss';
+import Profile from './Profile';
+import SignUp from './SignUp';
+import { AuthContext } from '../Providers/AuthProvider';
 
 const menuOptions = [
   { label: 'Productos', icon: <IconHome />, to: '/' },
   { label: 'Carrito', icon: <IconShoppingCart />, to: '/cart' },
 ];
 
-const logIn = (opts) => {
-  const { setisLogged } = opts;
-  return (
-    <Container p="xl" align="center" pb="xs">
-      <Button size="xs" mr="xl" onClick={() => setisLogged(0)}>
-        Iniciar Sesion
-      </Button>
-      <Button size="xs">Registrarse</Button>
-    </Container>
-  );
-};
-
-const loggedIn = (opts) => {
-  const { setisLogged } = opts;
-  return (
-    <Container p="xl" align="center" pb="xs">
-      <UnstyledButton py="xl">
-        <Group>
-          <Avatar size={40} color="blue">
-            JG
-          </Avatar>
-          <div>
-            <Text>Gordo TFT</Text>
-            <Text size="xs" mr="xl" color="dimmed">
-              jonhgraves@gilmail.com
-            </Text>
-          </div>
-        </Group>
-      </UnstyledButton>
-      <Button size="xs" mr="xl" onClick={() => setisLogged(1)}>
-        Salir
-      </Button>
-    </Container>
-  );
-};
-
 const Menu = () => {
   const { classes } = menuJss();
   const location = useLocation();
-  const [isLogged, setisLogged] = useState(1);
+  const [opened, setOpened] = useState(false);
+  const { logIn, user, logOut } = useContext(AuthContext);
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+
   const navLinks = menuOptions.map((item) => (
     <NavLink
       {...item}
@@ -61,8 +39,20 @@ const Menu = () => {
     />
   ));
 
+  const onSubmitHandler = (data) => {
+    logIn(data, () => setOpened(false));
+  };
+
   const opts = {
-    classes, setisLogged, navLinks, location,
+    classes,
+    opened,
+    navLinks,
+    location,
+    setOpened,
+    onSubmit: onSubmitHandler,
+    onExit: logOut,
+    form,
+    user,
   };
 
   const {
@@ -75,7 +65,7 @@ const Menu = () => {
         <div className={linksInner}>{navLinks}</div>
       </Navbar.Section>
       <Navbar.Section className={footer}>
-        {isLogged ? logIn(opts) : loggedIn(opts)}
+        {Object.keys(user).length === 0 ? SignUp(opts) : Profile(opts)}
       </Navbar.Section>
     </Navbar>
   );
