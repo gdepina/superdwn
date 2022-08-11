@@ -1,5 +1,4 @@
 node_modules/
 dist/
-public/
 package.json
 server.js

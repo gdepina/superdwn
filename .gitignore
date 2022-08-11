@@ -61,7 +61,7 @@ typings/
 # next.js build output
 .next
 
-**/.public
-*.public
-*/public
-/public/
+**/.dist
+*.dist
+*/dist
+/dist/
