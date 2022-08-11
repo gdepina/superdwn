@@ -13,6 +13,6 @@ export default ({ markup }) => `<!doctype html>
         </head>
         <body style="margin:0;font-family: 'Proxima Nova',-apple-system,'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif,sans-serif;">
           <div id="root">${markup}</div>
-          <script type="text/javascript" src="/dist/bundle.js"></script>
+          <script type="text/javascript" src="/public/bundle.js"></script>
         </body>
       </html>`;

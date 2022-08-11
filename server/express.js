@@ -36,7 +36,7 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Shagsring
 app.use(cors());
 
-app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')));
+app.use('/public', express.static(path.join(CURRENT_WORKING_DIR, 'public')));
 
 // mount routes
 
