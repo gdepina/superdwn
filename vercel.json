@@ -2,7 +2,7 @@
   "version": 2,
   "name": "superdwn",
   "builds": [
-    { "src": "app.js", "use": "@vercel/node" }
+    { "src": "/dist/server.generated.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/dist/server.generated.js" }
