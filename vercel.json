@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "superdwn",
+  "builds": [
+    { "src": "/dist/server.generated.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/dist/server.generated.js" }
+  ]
+}
