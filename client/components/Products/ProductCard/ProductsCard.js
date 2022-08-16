@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src={product.img} alt="product image" />
+        <Image withPlaceholder src={product.img} alt="product image" />
       </Card.Section>
 
       <Group position="apart">
@@ -16,7 +16,7 @@ const ProductCard = ({ product }) => {
           <Text size="lg" weight={500}>
             {product.name}
           </Text>
-          <Text lineClamp={2} size="md" color="dimmed">
+          <Text className={classes.productDesc} lineClamp={1} color="dimmed">
             {product.desc}
           </Text>
         </div>

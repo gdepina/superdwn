@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SimpleGrid } from '@mantine/core';
 import Card from './ProductCard';
-import PRODUCTS from './ProductData';
+import { fetchProducts } from '../../apis/product-api';
 
 const ProductList = () => {
-  const productList = PRODUCTS.map((product) => <Card product={product} />);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    fetchProducts()
+      .then((result) => {
+        setProducts(result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  const productList = products.map((product) => <Card product={product} />);
   return (
     <SimpleGrid
       cols={3}
