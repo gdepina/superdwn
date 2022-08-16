@@ -6,22 +6,8 @@ const MainRouter = () => (
   <Routes>
     <Route path="/" element={<div>Productos</div>} />
     <Route path="/cart" element={<div>Carrito</div>} />
-    <Route
-      path="/products"
-      element={
-        <div>
-          <ProductList />
-        </div>
-      }
-    />
-    <Route
-      path="/products/:id"
-      element={
-        <div>
-          <ProductDetail />
-        </div>
-      }
-    />
+    <Route path="/products" element={<ProductList />} />
+    <Route path="/products/:id" element={<ProductDetail />} />
   </Routes>
 );
 
