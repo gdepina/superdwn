@@ -13,8 +13,10 @@ const ProductCard = ({ product }) => {
 
       <Group position="apart">
         <div className={classes.titleContainer}>
-          <Text weight={500}>{product.name}</Text>
-          <Text size="xs" color="dimmed">
+          <Text size="lg" weight={500}>
+            {product.name}
+          </Text>
+          <Text lineClamp={2} size="md" color="dimmed">
             {product.desc}
           </Text>
         </div>

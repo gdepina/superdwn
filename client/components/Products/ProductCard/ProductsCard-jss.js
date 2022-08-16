@@ -6,7 +6,6 @@ const useStyles = createStyles((theme) => ({
   },
 
   imageSection: {
-    padding: theme.spacing.md,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
