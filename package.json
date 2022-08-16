@@ -33,10 +33,6 @@
       "pre-commit": "lint-staged"
     }
   },
-  "engines": {
-    "node": "8.11.1",
-    "npm": "5.8.0"
-  },
   "devDependencies": {
     "babel-core": "6.26.2",
     "babel-loader": "7.1.4",
@@ -64,6 +60,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@mantine/core": "^5.0.2",
+    "@mantine/form": "^5.1.0",
     "@mantine/hooks": "^5.0.2",
     "@tabler/icons": "^1.78.1",
     "body-parser": "1.18.2",

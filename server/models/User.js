@@ -41,8 +41,7 @@ const schema = new Schema({
     enum: ['comprador', 'empleado', 'manager'],
   },
   avatar: {
-    data: Buffer,
-    contentType: String,
+    data: String,
   },
 });
 
