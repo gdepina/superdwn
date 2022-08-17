@@ -24,9 +24,18 @@ const ProductCard = ({ product }) => {
       <Card.Section className={classes.section}>
         <Group spacing={30}>
           <div className={classes.priceContainer}>
-            <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-              ${product.price}
-            </Text>
+            {product.discount_percentage ? (
+              <div>
+                <Text color="red">${product.price}</Text>
+                <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
+                  ${Math.trunc(product.price - (product.price * product.discount_percentage) / 100)}
+                </Text>
+              </div>
+            ) : (
+              <Text style={{ marginTop: 'auto' }} size="xl" weight={700} sx={{ lineHeight: 1 }}>
+                ${product.price}
+              </Text>
+            )}
             {product.discount_percentage ? <Badge variant="outline">{product.discount_percentage}% off</Badge> : null}
           </div>
 

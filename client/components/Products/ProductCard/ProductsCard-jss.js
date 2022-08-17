@@ -40,6 +40,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
+    minHeight: 45,
   },
   titleContainer: {
     padding: '0.5rem 0',
