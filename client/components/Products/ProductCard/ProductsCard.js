@@ -26,13 +26,13 @@ const ProductCard = ({ product }) => {
           <div className={classes.priceContainer}>
             {product.discount_percentage ? (
               <div>
-                <Text color="red">${product.price}</Text>
-                <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
+                <Text style={{ display: 'inline' }} size="xl" weight={700} sx={{ lineHeight: 1 }}>
                   ${Math.trunc(product.price - (product.price * product.discount_percentage) / 100)}
                 </Text>
+                <Text className={classes.strikeStrought}>${product.price}</Text>
               </div>
             ) : (
-              <Text style={{ marginTop: 'auto' }} size="xl" weight={700} sx={{ lineHeight: 1 }}>
+              <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
                 ${product.price}
               </Text>
             )}

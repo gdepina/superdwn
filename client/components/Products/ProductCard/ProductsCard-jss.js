@@ -48,6 +48,12 @@ const useStyles = createStyles((theme) => ({
   productDesc: {
     size: theme.spacing.md,
   },
+  strikeStrought: {
+    textDecoration: 'line-through',
+    color: 'grey',
+    display: 'inline',
+    marginLeft: '0.3rem',
+  },
 }));
 
 export default useStyles;
