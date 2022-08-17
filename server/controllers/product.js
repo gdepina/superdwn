@@ -19,6 +19,14 @@ const list = (req, res) => {
     });
 };
 
+const detail = (req, res) => {
+  const { id } = req.params;
+  ProductModel
+    .findOne({ _id: id })
+    .then((orders) => res.json(orders))
+    .catch((error) => res.status(500).json({ message: 'internal server error', error }));
+};
+
 const create = (req, res) => {
   const form = new Formidable.IncomingForm();
   form.keepExtensions = true;
@@ -62,6 +70,7 @@ const destroyAss = (req, res) => {
 
 export default {
   list,
+  detail,
   create,
   update,
   categories,
