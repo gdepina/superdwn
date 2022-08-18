@@ -1,3 +1,6 @@
+# .env
+process.env
+
 # Logs
 logs
 *.log
