@@ -1,12 +1,13 @@
 import React from 'react';
-import { Card, Image, Text, Group, Badge, Button } from '@mantine/core';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Card, Image, Text, Group, Badge, Button } from '@mantine/core';
 import useStyles from './ProductsCard-jss';
 
 const ProductCard = ({ product }) => {
   const { classes } = useStyles();
   return (
-    <Card withBorder radius="md" className={classes.card}>
+    <Card component={Link} to={`/products/${product._id}`} withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
         <Image withPlaceholder src={product.img} alt="product image" />
       </Card.Section>
