@@ -1,16 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navbar, NavLink, ScrollArea } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { IconHome, IconShoppingCart } from '@tabler/icons';
+import { IconHome, IconPaperBag } from '@tabler/icons';
 import { Link, useLocation } from 'react-router-dom';
 import menuJss from './menu-jss';
 import Profile from './Profile';
 import SignUp from './SignUp';
 import { AuthContext } from '../Providers/AuthProvider';
 
+import Cart from '../../cart';
+
 const menuOptions = [
-  { label: 'Productos', icon: <IconHome />, to: '/' },
-  { label: 'Carrito', icon: <IconShoppingCart />, to: '/cart' },
+  { label: 'Home', icon: <IconHome />, to: '/' },
+  { label: 'Productos', icon: <IconPaperBag />, to: '/products' },
 ];
 
 const Menu = () => {
@@ -55,14 +57,15 @@ const Menu = () => {
     user,
   };
 
-  const {
-    links, linksInner, footer, navbar,
-  } = classes;
+  const { links, linksInner, footer, navbar } = classes;
 
   return (
     <Navbar width={{ sm: 300 }} p="md" className={navbar}>
       <Navbar.Section grow className={links} component={ScrollArea}>
-        <div className={linksInner}>{navLinks}</div>
+        <div className={linksInner}>
+          {navLinks}
+          <Cart />
+        </div>
       </Navbar.Section>
       <Navbar.Section className={footer}>
         {Object.keys(user).length === 0 ? SignUp(opts) : Profile(opts)}
