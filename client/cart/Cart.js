@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { ActionIcon, Avatar, Button, Drawer, Grid, NavLink, ScrollArea, Text } from '@mantine/core';
-import { IconMinus, IconPaperBag, IconPlus, IconShoppingCart } from '@tabler/icons';
+import { Button, Drawer, NavLink, ScrollArea, Text } from '@mantine/core';
+import { IconShoppingCart } from '@tabler/icons';
 import { map } from 'lodash';
 import cartJss from './cart-jss';
 import { CartContext } from '../components/Providers/CartProvider';
+import Item from './Item';
 
 const Cart = () => {
+  const { cart, parsedCart } = useContext(CartContext);
   const { classes } = cartJss();
-  const { cart, parsedCart, addItem, deleteItem } = useContext(CartContext);
   const [opened, setOpened] = useState(false);
   const [id, setId] = useState(null);
 
@@ -18,38 +19,7 @@ const Cart = () => {
       onMouseEnter={() => setId(items[0]._id)}
       onMouseLeave={() => setId(null)}
     >
-      <Grid>
-        <Grid.Col span={2}>
-          <Avatar width={43} height={43} radius="md" src={items[0].img}>
-            {!items[0].img && <IconPaperBag />}
-          </Avatar>
-        </Grid.Col>
-        <Grid.Col span={10}>
-          <Text size="xs" ml={10}>
-            {items[0].name} x{items.length}
-          </Text>
-          <div className={id !== items[0]._id ? classes.buttonHidden : classes.buttonVisible}>
-            <ActionIcon
-              variant="filled"
-              size={14}
-              color="green"
-              className={classes.buttonQuantityPlus}
-              onClick={() => addItem(items[0])}
-            >
-              <IconPlus size={12} />
-            </ActionIcon>
-            <ActionIcon
-              variant="filled"
-              size={14}
-              color="red"
-              className={classes.buttonQuantityMinus}
-              onClick={() => deleteItem(items[0])}
-            >
-              <IconMinus size={12} />
-            </ActionIcon>
-          </div>
-        </Grid.Col>
-      </Grid>
+      <Item buttonsQuantity={id === items[0]._id} items={items} />
     </div>
   ));
 
