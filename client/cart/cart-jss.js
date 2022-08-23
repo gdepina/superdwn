@@ -27,9 +27,18 @@ export default createStyles((theme) => ({
   },
 
   cartItem: {
+    '&:hover': { backgroundColor: theme.colors.dark[4] },
     marginBottom: '10px',
+    marginTop: '10px',
     minHeight: '63px',
-    maxWidth: '220px',
+    borderRadius: '10px',
+    maxWidth: '263px',
+  },
+
+  itemImg: {
+    border: `1px solid ${theme.colors.dark[3]}`,
+    marginTop: '5px',
+    marginLeft: '10px',
   },
 
   buttonQuantityPlus: {
