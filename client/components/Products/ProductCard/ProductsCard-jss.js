@@ -10,8 +10,8 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]}`,
-    minWidth: 378,
-    minHeight: 170,
+    maxWidth: 378,
+    maxHeight: 170,
   },
 
   label: {

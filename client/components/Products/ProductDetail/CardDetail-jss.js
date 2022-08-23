@@ -31,6 +31,16 @@ const styles = createStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  discButton: {
+    display: 'block',
+    maxWidth: '72px',
+  },
+  strikeStrought: {
+    textDecoration: 'line-through',
+    color: 'grey',
+    display: 'inline',
+    marginLeft: '0.3rem',
+  },
 }));
 
 export default styles;
