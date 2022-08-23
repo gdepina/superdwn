@@ -17,19 +17,19 @@ const Item = ({ item, itemQty }) => {
         </Avatar>
       </Grid.Col>
       <Grid.Col span={10}>
-        <Text className={classes.itemTitle} size="sm" ml={10}>
+        <Text lineClamp={1} size="md" ml={10}>
           {item.name}
-          <Badge size="sm" ml={5}>
-            <span style={{ fontSize: 8 }}>x</span>
-            <span style={{ fontSize: 11 }}>{itemQty}</span>
-          </Badge>
         </Text>
         <div className={classes.buttonsQtyGroup}>
+          <Badge size="sm" variant="light" color="gray" ml={10}>
+            <span style={{ fontSize: 10 }}>x</span>
+            <span style={{ fontSize: 12 }}>{itemQty}</span>
+          </Badge>
           <ActionIcon
             variant="light"
             size={18}
             color="green"
-            className={classes.buttonQuantityPlus}
+            className={classes.buttonQuantity}
             onClick={() => addItem(item)}
           >
             <IconPlus />
@@ -38,7 +38,7 @@ const Item = ({ item, itemQty }) => {
             variant="light"
             size={18}
             color="red"
-            className={classes.buttonQuantityMinus}
+            className={classes.buttonQuantity}
             onClick={() => deleteItem(item)}
           >
             <IconMinus />

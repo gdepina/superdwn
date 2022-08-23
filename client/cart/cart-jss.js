@@ -41,21 +41,13 @@ export default createStyles((theme) => ({
     marginLeft: '10px',
   },
 
-  itemTitle: {
-    display: 'inline-flex',
-    alignItems: 'center',
-  },
-
   buttonsQtyGroup: {
+    display: 'flex',
+    justifyContent: 'start',
     alignItems: 'center',
   },
 
-  buttonQuantityPlus: {
-    display: 'inline-flex',
-    marginLeft: '10px',
-  },
-
-  buttonQuantityMinus: {
+  buttonQuantity: {
     display: 'inline-flex',
     marginLeft: '5px',
   },
