@@ -9,16 +9,10 @@ const Cart = () => {
   const { cart, parsedCart } = useContext(CartContext);
   const { classes } = cartJss();
   const [opened, setOpened] = useState(false);
-  const [id, setId] = useState(null);
 
   const cartItems = parsedCart().map((cartItem) => (
-    <div
-      className={classes.cartItem}
-      key={cartItem.item._id}
-      onMouseEnter={() => setId(cartItem.item._id)}
-      onMouseLeave={() => setId(null)}
-    >
-      <Item buttonsQty={id === cartItem.item._id} item={cartItem.item} itemQty={cartItem.count} />
+    <div className={classes.cartItem} key={cartItem.item._id}>
+      <Item item={cartItem.item} itemQty={cartItem.count} />
     </div>
   ));
 
