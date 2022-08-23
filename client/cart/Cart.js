@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button, Drawer, NavLink, ScrollArea, Text } from '@mantine/core';
 import { IconShoppingCart } from '@tabler/icons';
-import { map } from 'lodash';
 import cartJss from './cart-jss';
 import { CartContext } from '../components/Providers/CartProvider';
 import Item from './Item';
@@ -12,14 +11,14 @@ const Cart = () => {
   const [opened, setOpened] = useState(false);
   const [id, setId] = useState(null);
 
-  const cartItems = map(parsedCart(), (items) => (
+  const cartItems = parsedCart().map((cartItem) => (
     <div
       className={classes.cartItem}
-      key={items[0]._id}
-      onMouseEnter={() => setId(items[0]._id)}
+      key={cartItem.item._id}
+      onMouseEnter={() => setId(cartItem.item._id)}
       onMouseLeave={() => setId(null)}
     >
-      <Item buttonsQuantity={id === items[0]._id} items={items} />
+      <Item buttonsQty={id === cartItem.item._id} item={cartItem.item} itemQty={cartItem.count} />
     </div>
   ));
 

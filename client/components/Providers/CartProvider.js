@@ -1,7 +1,7 @@
 import React, { createContext, useMemo } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import PropTypes from 'prop-types';
-import { groupBy, orderBy } from 'lodash';
+import { groupBy, map, orderBy } from 'lodash';
 
 const CartContext = createContext();
 
@@ -14,7 +14,13 @@ const CartProvider = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const parsedCart = () => {
     const ordered = orderBy(cart.items, ['name']);
-    return groupBy(ordered, '_id');
+    const group = groupBy(ordered, '_id');
+    const cartItems = map(group, (items) => ({
+      item: items[0],
+      count: items.length,
+      group: items,
+    }));
+    return cartItems;
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
