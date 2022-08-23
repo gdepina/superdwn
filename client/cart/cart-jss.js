@@ -41,6 +41,11 @@ export default createStyles((theme) => ({
     marginLeft: '10px',
   },
 
+  itemTitle: {
+    display: 'inline-flex',
+    alignItems: 'center',
+  },
+
   buttonQuantityPlus: {
     display: 'inline-flex',
     marginLeft: '10px',
@@ -57,9 +62,7 @@ export default createStyles((theme) => ({
     transition: 'visibility 0.2s, opacity 0.3s linear',
   },
 
-  buttonVisible: {
-    visibility: 'visible',
+  buttonsQtyGroup: {
     alignItems: 'center',
-    opacity: 1,
   },
 }));

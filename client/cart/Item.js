@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cartJss from './cart-jss';
 import { CartContext } from '../components/Providers/CartProvider';
 
-const Item = ({ item, itemQty, buttonsQty }) => {
+const Item = ({ item, itemQty }) => {
   const { classes } = cartJss();
   const { addItem, deleteItem } = useContext(CartContext);
 
@@ -17,15 +17,15 @@ const Item = ({ item, itemQty, buttonsQty }) => {
         </Avatar>
       </Grid.Col>
       <Grid.Col span={10}>
-        <Text size="sm" ml={10}>
+        <Text className={classes.itemTitle} size="sm" ml={10}>
           {item.name}
           <Badge size="sm" ml={5} px={5}>
             {itemQty}
           </Badge>
         </Text>
-        <div className={buttonsQty ? classes.buttonVisible : classes.buttonHidden}>
+        <div className={classes.buttonsQtyGroup}>
           <ActionIcon
-            variant="filled"
+            variant="light"
             size={14}
             color="green"
             className={classes.buttonQuantityPlus}
@@ -34,7 +34,7 @@ const Item = ({ item, itemQty, buttonsQty }) => {
             <IconPlus size={12} />
           </ActionIcon>
           <ActionIcon
-            variant="filled"
+            variant="light"
             size={14}
             color="red"
             className={classes.buttonQuantityMinus}
@@ -52,7 +52,6 @@ Item.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   item: PropTypes.object.isRequired,
   itemQty: PropTypes.number.isRequired,
-  buttonsQty: PropTypes.bool.isRequired,
 };
 
 export default Item;
