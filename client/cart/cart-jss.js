@@ -32,7 +32,7 @@ export default createStyles((theme) => ({
     marginTop: '10px',
     minHeight: '63px',
     borderRadius: '10px',
-    maxWidth: '263px',
+    maxWidth: '250px',
   },
 
   itemImg: {
@@ -46,6 +46,10 @@ export default createStyles((theme) => ({
     alignItems: 'center',
   },
 
+  buttonsQtyGroup: {
+    alignItems: 'center',
+  },
+
   buttonQuantityPlus: {
     display: 'inline-flex',
     marginLeft: '10px',
@@ -56,13 +60,11 @@ export default createStyles((theme) => ({
     marginLeft: '5px',
   },
 
-  buttonHidden: {
-    visibility: 'hidden',
-    opacity: 0,
-    transition: 'visibility 0.2s, opacity 0.3s linear',
-  },
-
-  buttonsQtyGroup: {
-    alignItems: 'center',
+  confirmPurchaseButton: {
+    marginTop: 10,
+    position: 'fixed',
+    left: 18,
+    bottom: 10,
+    width: '90%',
   },
 }));

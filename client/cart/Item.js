@@ -19,28 +19,29 @@ const Item = ({ item, itemQty }) => {
       <Grid.Col span={10}>
         <Text className={classes.itemTitle} size="sm" ml={10}>
           {item.name}
-          <Badge size="sm" ml={5} px={5}>
-            {itemQty}
+          <Badge size="sm" ml={5}>
+            <span style={{ fontSize: 8 }}>x</span>
+            <span style={{ fontSize: 11 }}>{itemQty}</span>
           </Badge>
         </Text>
         <div className={classes.buttonsQtyGroup}>
           <ActionIcon
             variant="light"
-            size={14}
+            size={18}
             color="green"
             className={classes.buttonQuantityPlus}
             onClick={() => addItem(item)}
           >
-            <IconPlus size={12} />
+            <IconPlus />
           </ActionIcon>
           <ActionIcon
             variant="light"
-            size={14}
+            size={18}
             color="red"
             className={classes.buttonQuantityMinus}
             onClick={() => deleteItem(item)}
           >
-            <IconMinus size={12} />
+            <IconMinus />
           </ActionIcon>
         </div>
       </Grid.Col>

@@ -26,11 +26,11 @@ const Cart = () => {
         padding="xl"
         size="md"
       >
-        <ScrollArea style={{ height: '88%' }}>
+        <ScrollArea style={{ height: '91%' }}>
           {cartItems.length < 1 ? <Text size="xs">Nada por aqui...</Text> : cartItems}
         </ScrollArea>
 
-        <Button color="green" size="xs" uppercase fullWidth>
+        <Button className={classes.confirmPurchaseButton} color="green" size="xs" uppercase fullWidth>
           Realizar Pedido
         </Button>
       </Drawer>
