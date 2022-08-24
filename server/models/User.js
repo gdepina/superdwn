@@ -45,6 +45,15 @@ const schema = new Schema({
   },
 });
 
+/* eslint-disable */
+schema.pre('save', function (next) {
+  if (this.discount_percentage) {
+    this.discount_price_fixed = this.price - (this.price * this.this.discount_percentage) / 100;
+  }
+  next();
+});
+/* eslint-enable */
+
 const User = mongoose.model('User', schema);
 
 export default User;
