@@ -12,15 +12,25 @@ const CartProvider = ({ children }) => {
   });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const parsedCart = () => {
+  const parseCart = () => {
     const ordered = orderBy(cart.items, ['name']);
     const group = groupBy(ordered, '_id');
     const cartItems = map(group, (items) => ({
       item: items[0],
       count: items.length,
       group: items,
+      subTotal: items.reduce((sum, item) => sum + item.priceFixed || item.price, 0),
     }));
     return cartItems;
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getTotal = (shoppingCart) => {
+    const total = {
+      price: shoppingCart.reduce((sum, item) => sum + item.subTotal, 0),
+      count: shoppingCart.reduce((sum, item) => sum + item.count, 0),
+    };
+    return total;
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,15 +52,19 @@ const CartProvider = ({ children }) => {
     });
   };
 
+  const parsedCart = parseCart(cart);
+  const totalCart = getTotal(parsedCart);
+
   const cartProviderValue = useMemo(
     () => ({
       cart,
       setCart,
       parsedCart,
+      totalCart,
       addItem,
       deleteItem,
     }),
-    [cart, setCart, parsedCart, addItem, deleteItem]
+    [cart, setCart, parsedCart, totalCart, addItem, deleteItem]
   );
 
   return <CartContext.Provider value={cartProviderValue}>{children}</CartContext.Provider>;

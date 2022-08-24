@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cartJss from './cart-jss';
 import { CartContext } from '../components/Providers/CartProvider';
 
-const Item = ({ item, itemQty }) => {
+const Item = ({ item, itemQty, subTotal }) => {
   const { classes } = cartJss();
   const { addItem, deleteItem } = useContext(CartContext);
 
@@ -43,6 +43,9 @@ const Item = ({ item, itemQty }) => {
           >
             <IconMinus />
           </ActionIcon>
+          <Badge size="sm" variant="light" color="gray" ml={5}>
+            <span style={{ fontSize: 12 }}>${subTotal}</span>
+          </Badge>
         </div>
       </Grid.Col>
     </Grid>
@@ -53,6 +56,7 @@ Item.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   item: PropTypes.object.isRequired,
   itemQty: PropTypes.number.isRequired,
+  subTotal: PropTypes.number.isRequired,
 };
 
 export default Item;
