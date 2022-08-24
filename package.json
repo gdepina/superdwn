@@ -24,7 +24,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint"
+      "eslint",
+      "prettier --write"
     ]
   },
   "husky": {
@@ -35,6 +36,7 @@
   "devDependencies": {
     "babel-core": "6.26.2",
     "babel-loader": "7.1.4",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
@@ -68,7 +70,6 @@
     "compression": "1.7.2",
     "cookie-parser": "1.4.3",
     "cors": "2.8.4",
-    "dayjs": "^1.11.5",
     "express": "4.16.3",
     "express-jwt": "5.3.1",
     "formidable": "1.2.1",
