@@ -70,7 +70,6 @@
     "compression": "1.7.2",
     "cookie-parser": "1.4.3",
     "cors": "2.8.4",
-    "dayjs": "^1.11.5",
     "express": "4.16.3",
     "express-jwt": "5.3.1",
     "formidable": "1.2.1",
