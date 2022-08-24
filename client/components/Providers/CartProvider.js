@@ -19,7 +19,8 @@ const CartProvider = ({ children }) => {
       item: items[0],
       count: items.length,
       group: items,
-      subTotal: items.reduce((sum, item) => sum + item.priceFixed || item.price, 0),
+      // eslint-disable-next-line
+      subTotal: items.reduce((sum, item) => (sum + (item.priceFixed ? item.priceFixed : item.price), 0)),
     }));
     return cartItems;
   };
@@ -64,6 +65,7 @@ const CartProvider = ({ children }) => {
       addItem,
       deleteItem,
     }),
+    // eslint-disable-next-line
     [cart, setCart, parsedCart, totalCart, addItem, deleteItem]
   );
 
