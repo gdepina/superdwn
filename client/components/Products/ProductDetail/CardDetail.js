@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Button } from '@mantine/core';
+import { Text, Button, Badge } from '@mantine/core';
 import PropTypes from 'prop-types';
 import styles from './CardDetail-jss';
 
@@ -12,7 +12,24 @@ const CardDetail = ({ product }) => {
         <Text className={classes.category}>Categoria: {product.category}</Text>
         <Text className={classes.description}>Detalle: {product.desc}</Text>
         <Text className={classes.stock}>Stock: {product.stock} u.</Text>
-        <Text className={classes.price}>Precio: ${product.price}</Text>
+        <Text className={classes.price}>
+          <div>
+            {product.discount_percentage ? (
+              <div>
+                <Text style={{ display: 'inline' }}>Precio: ${product.priceFixed}</Text>
+                <Text className={classes.strikeStrought}>${product.price}</Text>
+              </div>
+            ) : (
+              <Text className={classes.price}>Precio: ${product.price}</Text>
+            )}
+          </div>
+
+          {product.discount_percentage ? (
+            <Badge variant="outline" className={classes.discButton}>
+              {product.discount_percentage}% off
+            </Badge>
+          ) : null}
+        </Text>
       </div>
       <Button className={classes.button}>Agregar al carrito</Button>
     </div>
@@ -26,6 +43,7 @@ CardDetail.propTypes = {
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    priceFixed: PropTypes.number.isRequired,
     discount_percentage: PropTypes.number,
     discount_price_fixed: PropTypes.number,
     stock: PropTypes.number.isRequired,
