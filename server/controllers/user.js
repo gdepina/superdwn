@@ -9,6 +9,7 @@ const create = (req, res) => {
     if (err) {
       return res.status(400).json({
         message: 'Image could not be uploaded',
+        err,
       });
     }
     const user = new UserModel(fields);
@@ -18,10 +19,15 @@ const create = (req, res) => {
     }
     user.save((error, savedUser) => {
       if (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({
+          message: 'internal server error',
+          code: 'SERVER_ERROR',
+          error,
+        });
       }
       res.json({
         message: 'user created successfully',
+        code: 'CREATED',
         savedUser,
       });
     });

@@ -41,7 +41,8 @@ const schema = new Schema({
     enum: ['comprador', 'empleado', 'manager'],
   },
   avatar: {
-    data: String,
+    default: '',
+    type: String,
   },
 });
 
