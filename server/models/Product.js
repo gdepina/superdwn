@@ -44,7 +44,7 @@ const schema = new Schema({
 /* eslint-disable */
 schema.pre('save', function (next) {
   if (this.discount_percentage) {
-    this.discount_price_fixed = this.price - (this.price * this.discount_percentage) / 100;
+    this.discount_price_fixed = (this.price - (this.price * this.discount_percentage) / 100).toFixed(2);
   }
   next();
 });
