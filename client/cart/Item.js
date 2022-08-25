@@ -44,7 +44,7 @@ const Item = ({ item, itemQty, subTotal }) => {
             <IconMinus />
           </ActionIcon>
           <Badge size="sm" variant="light" color="gray" ml={5}>
-            <span style={{ fontSize: 12 }}>{`$${subTotal.toFixed(2)}`}</span>
+            <span style={{ fontSize: 12 }}>${subTotal.toFixed(2)}</span>
           </Badge>
         </div>
       </Grid.Col>

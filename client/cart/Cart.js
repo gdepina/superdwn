@@ -12,7 +12,7 @@ const Cart = () => {
 
   const cartItems = parsedCart.map((cartItem) => (
     <div className={classes.cartItem} key={cartItem.item._id}>
-      <Item item={cartItem.item} itemQty={cartItem.count} subTotal={cartItem.subTotal.toFixed(2)} />
+      <Item item={cartItem.item} itemQty={cartItem.count} subTotal={cartItem.subTotal} />
     </div>
   ));
 
@@ -39,7 +39,7 @@ const Cart = () => {
                 {` ${totalCart.count} Productos`}
               </Badge>
               <Badge size="lg" variant="light" color="gray">
-                {`$${totalCart.price}`}
+                ${totalCart.price.toFixed(2)}
               </Badge>
             </div>
 
