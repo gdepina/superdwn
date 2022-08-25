@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Card, Image, Text, Group, Badge, Button } from '@mantine/core';
+import { Badge, Button, Card, Group, Image, Text } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import { IconCheck } from '@tabler/icons';
 import useStyles from './ProductsCard-jss';
+import { CartContext } from '../../Providers/CartProvider';
 
 const ProductCard = ({ product }) => {
+  const { addItem } = useContext(CartContext);
   const { classes } = useStyles();
+
+  const addItemButtonHandler = (e, prod) => {
+    e.preventDefault();
+    addItem(prod);
+    showNotification({
+      title: `${prod.name} se agrego con exito al carrito!`,
+      icon: <IconCheck />,
+      autoClose: 3000,
+    });
+  };
+
   return (
     <Card component={Link} to={`/products/${product._id}`} withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
@@ -47,7 +62,7 @@ const ProductCard = ({ product }) => {
             {product.discount_percentage ? <Badge variant="outline">{product.discount_percentage}% off</Badge> : null}
           </div>
 
-          <Button className={classes.button} radius="xl">
+          <Button className={classes.button} radius="xl" onClick={(e) => addItemButtonHandler(e, product)}>
             Agregar al carrito
           </Button>
         </Group>

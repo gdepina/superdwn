@@ -41,6 +41,15 @@ const schema = new Schema({
   },
 });
 
+/* eslint-disable */
+schema.pre('save', function (next) {
+  if (this.discount_percentage) {
+    this.discount_price_fixed = (this.price - (this.price * this.discount_percentage) / 100).toFixed(2);
+  }
+  next();
+});
+/* eslint-enable */
+
 const Product = mongoose.model('Product', schema);
 
 export default Product;

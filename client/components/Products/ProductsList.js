@@ -10,9 +10,11 @@ const ProductList = () => {
       .then((result) => {
         setProducts(result);
       })
+      /* eslint-disable no-console */
       .catch((err) => console.log(err));
   }, []);
-  const productList = products.map((product) => <Card product={product} />);
+
+  const productList = products.map((product) => <Card key={product._id} product={product} />);
   return (
     <SimpleGrid
       cols={3}
