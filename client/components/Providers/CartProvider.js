@@ -1,4 +1,4 @@
-import React, { createContext, useMemo, useCallback } from 'react';
+import React, { createContext, useCallback, useMemo } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import PropTypes from 'prop-types';
 import { groupBy, map, orderBy } from 'lodash';
@@ -58,16 +58,18 @@ const CartProvider = ({ children }) => {
     [cart, setCart]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const deleteItem = (product) => {
-    const temp = cart.items;
-    const index = temp.indexOf(product);
-    temp.splice(index, 1);
-    setCart({
-      count: cart.count - 1,
-      items: temp,
-    });
-  };
+  const deleteItem = useCallback(
+    (product) => {
+      const temp = cart.items;
+      const index = temp.indexOf(product);
+      temp.splice(index, 1);
+      setCart({
+        count: cart.count - 1,
+        items: temp,
+      });
+    },
+    [cart, setCart]
+  );
 
   const parsedCart = parseCart(cart);
   const { cartTotalPrice, cartTotalItems } = getTotal(parsedCart);
@@ -82,7 +84,6 @@ const CartProvider = ({ children }) => {
       addItem,
       deleteItem,
     }),
-    // eslint-disable-next-line
     [cart, setCart, parsedCart, cartTotalPrice, cartTotalItems, addItem, deleteItem]
   );
 
