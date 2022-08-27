@@ -53,8 +53,19 @@ const Item = ({ item, itemQty, subTotal }) => {
 };
 
 Item.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    stock: PropTypes.number.isRequired,
+    img: PropTypes.string,
+    discount_percentage: PropTypes.number,
+    discount_price_fixed: PropTypes.number,
+    priceFixed: PropTypes.number,
+    __v: PropTypes.number,
+  }).isRequired,
   itemQty: PropTypes.number.isRequired,
   subTotal: PropTypes.number.isRequired,
 };

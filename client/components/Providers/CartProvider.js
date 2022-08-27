@@ -15,7 +15,7 @@ const CartProvider = ({ children }) => {
     const ordered = orderBy(cartState.items, ['name']);
     const group = groupBy(ordered, '_id');
 
-    const cartItems = map(group, (items) => {
+    return map(group, (items) => {
       const price = items.reduce(
         (sum, item) => sum + (item.discount_price_fixed ? item.discount_price_fixed : item.price),
         0
@@ -23,16 +23,13 @@ const CartProvider = ({ children }) => {
 
       const priceFixed = Number(price.toFixed(2));
 
-      const item = {
+      return {
         item: items[0],
         count: items.length,
         group: items,
         subTotal: priceFixed,
       };
-      return item;
     });
-
-    return cartItems;
   };
 
   const getTotal = (shoppingCart) => {
@@ -40,12 +37,10 @@ const CartProvider = ({ children }) => {
     const cartTotalPrice = Number(totalPrice.toFixed(2));
     const cartTotalItems = shoppingCart.reduce((sum, item) => sum + item.count, 0);
 
-    const total = {
+    return {
       cartTotalPrice,
       cartTotalItems,
     };
-
-    return total;
   };
 
   const addItem = useCallback(
