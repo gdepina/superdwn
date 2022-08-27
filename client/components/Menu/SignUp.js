@@ -1,6 +1,7 @@
 import {
   Button, Container, Group, Modal, TextInput,
 } from '@mantine/core';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 const SignUp = (opts) => {
@@ -9,20 +10,10 @@ const SignUp = (opts) => {
   } = opts;
   return (
     <Container p="xl" align="center" pb="xs">
-      <Modal
-        centered
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Inicia Sesion"
-      >
+      <Modal centered opened={opened} onClose={() => setOpened(false)} title="Inicia Sesion">
         <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
           <TextInput required label="Email" placeholder="your@email.com" {...form.getInputProps('email')} />
-          <TextInput
-            required
-            label="Contraseña"
-            placeholder="Contraseña"
-            {...form.getInputProps('password')}
-          />
+          <TextInput required label="Contraseña" placeholder="Contraseña" {...form.getInputProps('password')} />
 
           <Group position="right" mt="md">
             <Button type="submit">Submit</Button>
@@ -32,7 +23,9 @@ const SignUp = (opts) => {
       <Button size="xs" mr="xl" onClick={() => setOpened(true)}>
         Iniciar Sesion
       </Button>
-      <Button size="xs">Registrarse</Button>
+      <Button size="xs" component={Link} to="/register">
+        Registrarse
+      </Button>
     </Container>
   );
 };

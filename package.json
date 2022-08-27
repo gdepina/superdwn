@@ -62,6 +62,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@mantine/core": "^5.0.2",
+    "@mantine/dates": "^5.2.0",
     "@mantine/form": "^5.1.0",
     "@mantine/hooks": "^5.0.2",
     "@mantine/notifications": "^5.2.0",

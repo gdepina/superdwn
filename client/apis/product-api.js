@@ -7,11 +7,10 @@ const fetchProducts = () =>
     .catch((err) => console.log(err));
 
 const fetchProductDetail = async (id) => {
-  // ya se que falta manejar los errores pero estaria bueno q lo haga otro
-  // habria que mejorar la api para que devuelva CODE en las diferentes respuestas
-  // idea: podriamos armar un hook useFetch?
   const response = await fetch(`/api/products/${id}`, { method: 'GET' });
   const productDetail = await response.json();
+  // eslint-disable-next-line max-len
+  productDetail.priceFixed = Math.trunc(productDetail.price - (productDetail.price * productDetail.discount_percentage) / 100);
   return productDetail;
 };
 

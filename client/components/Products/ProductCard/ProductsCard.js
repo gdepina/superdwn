@@ -24,7 +24,14 @@ const ProductCard = ({ product }) => {
   return (
     <Card component={Link} to={`/products/${product._id}`} withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image withPlaceholder src={product.img} alt="product image" />
+        <Image
+          width={378}
+          height={171}
+          className={classes.imageConfig}
+          withPlaceholder
+          src={product.img}
+          alt="product image"
+        />
       </Card.Section>
 
       <Group position="apart">
@@ -43,7 +50,7 @@ const ProductCard = ({ product }) => {
             {product.discount_percentage ? (
               <div>
                 <Text style={{ display: 'inline' }} size="xl" weight={700} sx={{ lineHeight: 1 }}>
-                  ${Math.trunc(product.price - (product.price * product.discount_percentage) / 100)}
+                  ${product.priceFixed}
                 </Text>
                 <Text className={classes.strikeStrought}>${product.price}</Text>
               </div>
@@ -71,6 +78,7 @@ ProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    priceFixed: PropTypes.number.isRequired,
     discount_percentage: PropTypes.number,
     discount_price_fixed: PropTypes.number,
     stock: PropTypes.number.isRequired,
