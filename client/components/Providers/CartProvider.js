@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react';
+import React, { createContext, useMemo, useCallback } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import PropTypes from 'prop-types';
 import { groupBy, map, orderBy } from 'lodash';
@@ -11,38 +11,52 @@ const CartProvider = ({ children }) => {
     defaultValue: { count: 0, items: [] },
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const parseCart = () => {
-    const ordered = orderBy(cart.items, ['name']);
+  const parseCart = (cartState) => {
+    const ordered = orderBy(cartState.items, ['name']);
     const group = groupBy(ordered, '_id');
-    const cartItems = map(group, (items) => ({
-      item: items[0],
-      count: items.length,
-      group: items,
-      subTotal: items.reduce(
+
+    const cartItems = map(group, (items) => {
+      const price = items.reduce(
         (sum, item) => sum + (item.discount_price_fixed ? item.discount_price_fixed : item.price),
         0
-      ),
-    }));
+      );
+
+      const priceFixed = Number(price.toFixed(2));
+
+      const item = {
+        item: items[0],
+        count: items.length,
+        group: items,
+        subTotal: priceFixed,
+      };
+      return item;
+    });
+
     return cartItems;
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getTotal = (shoppingCart) => {
+    const totalPrice = shoppingCart.reduce((sum, item) => sum + item.subTotal, 0);
+    const cartTotalPrice = Number(totalPrice.toFixed(2));
+    const cartTotalItems = shoppingCart.reduce((sum, item) => sum + item.count, 0);
+
     const total = {
-      price: shoppingCart.reduce((sum, item) => sum + item.subTotal, 0),
-      count: shoppingCart.reduce((sum, item) => sum + item.count, 0),
+      cartTotalPrice,
+      cartTotalItems,
     };
+
     return total;
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const addItem = (product) => {
-    setCart({
-      count: cart.count + 1,
-      items: [...cart.items, product],
-    });
-  };
+  const addItem = useCallback(
+    (product) => {
+      setCart({
+        count: cart.count + 1,
+        items: [...cart.items, product],
+      });
+    },
+    [cart, setCart]
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const deleteItem = (product) => {
@@ -56,19 +70,20 @@ const CartProvider = ({ children }) => {
   };
 
   const parsedCart = parseCart(cart);
-  const totalCart = getTotal(parsedCart);
+  const { cartTotalPrice, cartTotalItems } = getTotal(parsedCart);
 
   const cartProviderValue = useMemo(
     () => ({
       cart,
       setCart,
       parsedCart,
-      totalCart,
+      cartTotalPrice,
+      cartTotalItems,
       addItem,
       deleteItem,
     }),
     // eslint-disable-next-line
-    [cart, setCart, parsedCart, totalCart, addItem, deleteItem]
+    [cart, setCart, parsedCart, cartTotalPrice, cartTotalItems, addItem, deleteItem]
   );
 
   return <CartContext.Provider value={cartProviderValue}>{children}</CartContext.Provider>;

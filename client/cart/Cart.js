@@ -6,7 +6,7 @@ import { CartContext } from '../components/Providers/CartProvider';
 import Item from './Item';
 
 const Cart = () => {
-  const { parsedCart, totalCart } = useContext(CartContext);
+  const { parsedCart, cartTotalPrice, cartTotalItems } = useContext(CartContext);
   const { classes } = cartJss();
   const [opened, setOpened] = useState(false);
 
@@ -36,10 +36,10 @@ const Cart = () => {
           <div className={classes.cartFooterContainer}>
             <div className={classes.cartResume}>
               <Badge size="lg" variant="light" color="gray">
-                {` ${totalCart.count} Productos`}
+                {` ${cartTotalItems} Productos`}
               </Badge>
               <Badge size="lg" variant="light" color="gray">
-                ${totalCart.price.toFixed(2)}
+                {`$${cartTotalPrice}`}
               </Badge>
             </div>
 
@@ -63,10 +63,10 @@ const Cart = () => {
         className={classes.navLink}
         onClick={() => setOpened(true)}
         icon={
-          totalCart.count ? (
+          cartTotalItems ? (
             <div className={classes.iconBadgeContainer}>
               <IconShoppingCart className={classes.iconBadgeIcon} />
-              <div className={classes.iconBadge}>{totalCart.count}</div>
+              <div className={classes.iconBadge}>{cartTotalItems}</div>
             </div>
           ) : (
             <IconShoppingCart />
