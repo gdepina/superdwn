@@ -5,11 +5,10 @@ const fetchProducts = () =>
     .then((response) => response.json())
     .catch((err) => console.log(err));
 
-const fetchProductDetail = (id) =>
-  fetch(`/api/products/${id}`, {
-    method: 'GET',
-  })
-    .then((response) => response.json())
-    .catch((err) => console.log(err));
-// eslint-disable-next-line import/prefer-default-export
+const fetchProductDetail = async (id) => {
+  const response = await fetch(`/api/products/${id}`, { method: 'GET' });
+  const productDetail = await response.json();
+  return productDetail;
+};
+
 export { fetchProducts, fetchProductDetail };
