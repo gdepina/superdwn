@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { SimpleGrid } from '@mantine/core';
+import { useSearchParams } from 'react-router-dom';
 import Card from './ProductCard';
 import { fetchProducts } from '../../apis/product-api';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
   useEffect(() => {
-    fetchProducts()
+    fetchProducts(searchParams.get('name'))
       .then((result) => {
         setProducts(result);
       })
-      /* eslint-disable no-console */
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => err);
+  }, [searchParams]);
 
   const productList = products.map((product) => <Card key={product._id} product={product} />);
   return (

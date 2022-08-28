@@ -7,6 +7,8 @@ import Menu from './components/Menu';
 import { AuthProvider } from './components/Providers/AuthProvider';
 import { CartProvider } from './components/Providers/CartProvider';
 
+import SearchBar from './components/SearchProducts';
+
 const App = () => (
   <AuthProvider>
     <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
@@ -16,7 +18,11 @@ const App = () => (
             <AppShell
               padding="md"
               navbar={<Menu />}
-              header={<Header height={60} />}
+              header={
+                <Header height={68}>
+                  <SearchBar />
+                </Header>
+              }
               styles={(theme) => ({
                 main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
               })}

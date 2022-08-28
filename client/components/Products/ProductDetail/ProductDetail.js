@@ -13,7 +13,7 @@ const ProductDetail = () => {
   return (
     <Grid gutter="md" py="10vh">
       <Grid.Col span={8}>
-        <Image width={1040} height={450} radius="md" src={product.img} alt={product.name} />
+        <Image withPlaceholder width={1040} height={450} radius="md" src={product.img} alt={product.name} />
       </Grid.Col>
       <Grid.Col span={4}>
         <CardDetail product={product} />

@@ -8,7 +8,7 @@ const list = (req, res) => {
   const query = {};
 
   if (category) query.category = category;
-  if (name) query.name = { $regex: `(.*)${name}(.*)` };
+  if (name) query.name = { $regex: `(.*)${name}(.*)`, $options: 'i' };
 
   ProductModel.find(query)
     .then((products) => {
@@ -21,8 +21,7 @@ const list = (req, res) => {
 
 const detail = (req, res) => {
   const { id } = req.params;
-  ProductModel
-    .findOne({ _id: id })
+  ProductModel.findOne({ _id: id })
     .then((orders) => res.json(orders))
     .catch((error) => res.status(500).json({ message: 'internal server error', error }));
 };
