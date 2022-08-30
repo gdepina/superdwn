@@ -2,6 +2,7 @@ import {
   Avatar, Button, Container, Group, Text, UnstyledButton,
 } from '@mantine/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = (opts) => {
   const { onExit, user } = opts;
@@ -11,7 +12,7 @@ const Profile = (opts) => {
   return (
     <Container p="xl" align="center" pb="xs">
       <UnstyledButton py="xl">
-        <Group>
+        <Group component={Link} to="/profile">
           <Avatar size={40} color="blue">
             {name.charAt(0).toUpperCase()}
             {surname.charAt(0).toUpperCase()}
