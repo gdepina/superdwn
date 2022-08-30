@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Badge, Button, Divider, Drawer, NavLink, ScrollArea, Text } from '@mantine/core';
+import { Badge, Button, Drawer, NavLink, ScrollArea, Text } from '@mantine/core';
 import { IconShoppingCart } from '@tabler/icons';
 import cartJss from './cart-jss';
 import { CartContext } from '../components/Providers/CartProvider';
 import Item from './Item';
 
 const Cart = () => {
-  const { parsedCart, totalCart } = useContext(CartContext);
+  const { parsedCart, cartTotalPrice, cartTotalItems } = useContext(CartContext);
   const { classes } = cartJss();
   const [opened, setOpened] = useState(false);
 
@@ -26,24 +26,36 @@ const Cart = () => {
         padding="xl"
         size="md"
       >
-        <ScrollArea style={{ height: '86%' }}>
-          {cartItems.length < 1 ? <Text size="xs">Nada por aqui...</Text> : cartItems}
-        </ScrollArea>
-
-        <Divider my="sm" variant="dashed" />
-
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Badge size="lg" variant="light" color="gray">
-            {` ${totalCart.count} Productos`}
-          </Badge>
-          <Badge size="lg" variant="light" color="gray">
-            ${totalCart.price}
-          </Badge>
+        <div className={classes.scrollContainer}>
+          <ScrollArea style={{ height: '100%' }}>
+            {cartItems.length < 1 ? <Text size="xs">Nada por aqui...</Text> : cartItems}
+          </ScrollArea>
         </div>
 
-        <Button className={classes.confirmPurchaseButton} color="green" size="xs" uppercase fullWidth>
-          Realizar Pedido
-        </Button>
+        <div className={classes.cartFooter}>
+          <div className={classes.cartFooterContainer}>
+            <div className={classes.cartResume}>
+              <Badge size="lg" variant="light" color="gray">
+                {` ${cartTotalItems} Productos`}
+              </Badge>
+              <Badge size="lg" variant="light" color="gray">
+                {`$${cartTotalPrice}`}
+              </Badge>
+            </div>
+
+            <Button
+              className={classes.confirmPurchaseButton}
+              color="green"
+              size="xs"
+              mt={10}
+              mb={10}
+              uppercase
+              fullWidth
+            >
+              Realizar Pedido
+            </Button>
+          </div>
+        </div>
       </Drawer>
 
       <NavLink
@@ -51,10 +63,10 @@ const Cart = () => {
         className={classes.navLink}
         onClick={() => setOpened(true)}
         icon={
-          totalCart.count ? (
+          cartTotalItems ? (
             <div className={classes.iconBadgeContainer}>
               <IconShoppingCart className={classes.iconBadgeIcon} />
-              <div className={classes.iconBadge}>{totalCart.count}</div>
+              <div className={classes.iconBadge}>{cartTotalItems}</div>
             </div>
           ) : (
             <IconShoppingCart />

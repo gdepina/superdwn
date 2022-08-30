@@ -52,11 +52,24 @@ export default createStyles((theme) => ({
     marginLeft: '5px',
   },
 
-  confirmPurchaseButton: {
-    marginTop: 10,
+  scrollContainer: {
+    height: '100%',
+    paddingBottom: 110,
+  },
+
+  cartFooter: {
     position: 'fixed',
-    left: 18,
-    bottom: 10,
-    width: '90%',
+    bottom: 0,
+    width: 270,
+  },
+
+  cartFooterContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  cartResume: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 }));
