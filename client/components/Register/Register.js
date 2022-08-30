@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
-import {
-  Card, TextInput, PasswordInput, Button, Group, Text,
-} from '@mantine/core';
-import { useForm } from '@mantine/form';
+import dayjs from 'dayjs';
+import { z } from 'zod';
+import { Button, Card, Group, PasswordInput, Text, TextInput } from '@mantine/core';
+import { useForm, zodResolver } from '@mantine/form';
 import { DatePicker } from '@mantine/dates';
+import { IconAt, IconCalendar } from '@tabler/icons';
 import { register } from '../../apis/users-api';
 
 const Register = () => {
   const [message, setMessage] = useState(null);
+  const schema = z
+    .object({
+      name: z.string().min(2, { message: 'El nombre debe tener al menos 2 letras.' }),
+      surname: z.string().min(2, { message: 'El apellido debe tener al menos 2 letras.' }),
+      password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+      password2: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+      email: z.string().email({ message: 'Email invalido' }),
+    })
+    .refine((data) => data.password === data.password2, {
+      message: "Passwords don't match",
+      path: ['password2'], // path of error
+    });
+
   const form = useForm({
     initialValues: {
       name: '',
@@ -19,77 +33,60 @@ const Register = () => {
       birthDate: '',
     },
 
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Email Inválido'),
-      password2: (value, values) => (value !== values.password ? 'Las contraseñas no coinciden' : null),
-    },
+    validate: zodResolver(schema),
   });
 
   const handlerSubmit = (values) => {
     register(values)
       .then((result) => {
         result.code !== 'CREATED'
-          ? setMessage('Informacion incorrecta o puede que usuario ya exista o el email ya este en uso')
-          : setMessage('Usuario creado con exito');
+          ? setMessage('Informacion incorrecta, puede que el usuario ya exista o el email ya este en uso.')
+          : setMessage('Usuario creado con éxito!');
       })
-    // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars
       .catch((error) => {
         setMessage('Error conectandose al servidor');
       });
   };
 
   return (
-    <Card sx={{ maxWidth: '35%' }} shadow="sm" p="lg" radius="md" withBorder mx="auto" my="10%">
+    <Card sx={{ width: '400px' }} shadow="sm" p="lg" radius="md" withBorder mt="10px" ml="10px">
       {/* <Card.Section> */}
-      <h3>REGISTRO DE USUARIO</h3>
+      <h3>
+        <Text align="center" weight={500} underline size="lg">
+          REGISTRO DE USUARIO
+        </Text>
+      </h3>
       <Text size="md">{message}</Text>
       <form onSubmit={form.onSubmit((values) => handlerSubmit(values))}>
-        <TextInput mb="md" required label="Nombres" placeholder="Nombres" size="md" {...form.getInputProps('name')} />
+        <TextInput mb="md" required label="Nombres" placeholder="Nombres" {...form.getInputProps('name')} />
+        <TextInput mb="md" required label="Apellido" placeholder="Apellido" {...form.getInputProps('surname')} />
         <TextInput
           mb="md"
-          required
-          label="Apellido"
-          placeholder="Apellido"
-          size="md"
-          {...form.getInputProps('surname')}
-        />
-        <TextInput
-          mb="md"
-          required
           label="Email"
           placeholder="Escriba aquí su Email"
-          size="md"
+          icon={<IconAt size={15} />}
           {...form.getInputProps('email')}
         />
+        <PasswordInput mb="md" label="Contraseña" placeholder="Contraseña" {...form.getInputProps('password')} />
         <PasswordInput
           mb="md"
-          required
-          label="Contraseña"
-          placeholder="Contraseña"
-          size="md"
-          {...form.getInputProps('password')}
-        />
-        <PasswordInput
-          mb="md"
-          required
           label="Confirmar contraseña"
           placeholder="Repetir contraseña"
-          size="md"
           {...form.getInputProps('password2')}
         />
         <TextInput
           mb="md"
-          required
-          label="Nombre de Usuario"
-          placeholder="Nombre de Usuario"
-          size="md"
+          label="Nombre de usuario"
+          placeholder="Nombre de usuario"
           {...form.getInputProps('userName')}
         />
         <DatePicker
           mb="md"
           placeholder="Escoja una fecha"
           label="Fecha de nacimiento"
-          size="lg"
+          icon={<IconCalendar size={15} />}
+          maxDate={dayjs(new Date()).toDate()}
           {...form.getInputProps('birthDate')}
         />
         <Group position="right" mt="md">
