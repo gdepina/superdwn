@@ -18,7 +18,7 @@ const Register = () => {
       email: z.string().email({ message: 'Email invalido' }),
     })
     .refine((data) => data.password === data.password2, {
-      message: "Passwords don't match",
+      message: 'Las contraseñas no coinciden.',
       path: ['password2'], // path of error
     });
 
