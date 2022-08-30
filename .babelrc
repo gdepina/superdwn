@@ -4,5 +4,9 @@
     "stage-2",
     "react"
   ],
-  "plugins": []
+  "plugins": [
+    ["transform-runtime", {
+      "regenerator": true
+    }]
+  ]
 }
