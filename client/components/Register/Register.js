@@ -43,15 +43,13 @@ const Register = () => {
           ? setMessage('Informacion incorrecta, puede que el usuario ya exista o el email ya este en uso.')
           : setMessage('Usuario creado con éxito!');
       })
-      // eslint-disable-next-line no-unused-vars
-      .catch((error) => {
+      .catch(() => {
         setMessage('Error conectandose al servidor');
       });
   };
 
   return (
     <Card sx={{ width: '400px' }} shadow="sm" p="lg" radius="md" withBorder mt="10px" ml="10px">
-      {/* <Card.Section> */}
       <h3>
         <Text align="center" weight={500} underline size="lg">
           REGISTRO DE USUARIO
@@ -63,26 +61,36 @@ const Register = () => {
         <TextInput mb="md" required label="Apellido" placeholder="Apellido" {...form.getInputProps('surname')} />
         <TextInput
           mb="md"
+          required
           label="Email"
           placeholder="Escriba aquí su Email"
           icon={<IconAt size={15} />}
           {...form.getInputProps('email')}
         />
-        <PasswordInput mb="md" label="Contraseña" placeholder="Contraseña" {...form.getInputProps('password')} />
         <PasswordInput
           mb="md"
+          required
+          label="Contraseña"
+          placeholder="Contraseña"
+          {...form.getInputProps('password')}
+        />
+        <PasswordInput
+          mb="md"
+          required
           label="Confirmar contraseña"
           placeholder="Repetir contraseña"
           {...form.getInputProps('password2')}
         />
         <TextInput
           mb="md"
+          required
           label="Nombre de usuario"
           placeholder="Nombre de usuario"
           {...form.getInputProps('userName')}
         />
         <DatePicker
           mb="md"
+          required
           placeholder="Escoja una fecha"
           label="Fecha de nacimiento"
           icon={<IconCalendar size={15} />}
@@ -90,7 +98,7 @@ const Register = () => {
           {...form.getInputProps('birthDate')}
         />
         <Group position="right" mt="md">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Registrar</Button>
         </Group>
       </form>
     </Card>
