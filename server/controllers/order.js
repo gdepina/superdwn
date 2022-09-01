@@ -1,12 +1,11 @@
 import { Order } from '../models/Order';
 
 const list = (req, res) => {
-  Order
-    .find({ user: req.user._id }, { user: 0 })
+  Order.find({ user: req.user._id }, { user: 0 })
     .sort('-createdAt')
-  // .skip(0) pagination start row
-  // .limit(10) pagination end row
-  // .populate('user', '-_id -password')
+    // .skip(0) pagination start row
+    // .limit(10) pagination end row
+    // .populate('user', '-_id -password')
     .populate('products.product', '-stock')
     .then((orders) => {
       res.json({ orders });
@@ -15,8 +14,7 @@ const list = (req, res) => {
 
 const detail = (req, res) => {
   const { id } = req.params;
-  Order
-    .findOne({ _id: id, user: req.user._id })
+  Order.findOne({ _id: id, user: req.user._id })
     .populate('user', '-_id -password')
     .populate('products.product', '-stock')
     .then((orders) => res.json(orders));
@@ -33,7 +31,7 @@ const create = (req, res) => {
       .populate('user', '-_id -password')
       .populate('products.product', '-stock')
       .execPopulate()
-      .then((ordPopulated) => res.json({ message: 'orden creada con exito', ordPopulated }));
+      .then((ordPopulated) => res.json({ message: 'orden creada con exito', order: ordPopulated }));
   });
 };
 
