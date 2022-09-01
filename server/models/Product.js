@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const schema = new Schema({
+export const ProductSchema = new Schema({
   name: {
     type: String,
     trim: true,
@@ -41,7 +41,7 @@ const schema = new Schema({
   },
 });
 
-schema.pre('save', function (next) {
+ProductSchema.pre('save', function (next) {
   const { discount_percentage: percentage, price } = this;
   if (percentage) {
     this.discount_price_fixed = (price - (price * percentage) / 100).toFixed(2);
@@ -49,6 +49,4 @@ schema.pre('save', function (next) {
   next();
 });
 
-const Product = mongoose.model('Product', schema);
-
-export default Product;
+export const ProductModel = mongoose.model('Product', ProductSchema);
