@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ProductSchema } from './Product';
 
 const { Schema } = mongoose;
 
@@ -17,11 +18,7 @@ const paymentTypes = {
 
 const OrderItemSchema = new Schema(
   {
-    product: {
-      type: Schema.ObjectId,
-      ref: 'Product',
-      required: 'Se requiere id del producto',
-    },
+    ...ProductSchema.obj,
     quantity: {
       type: Number,
       min: 1,
@@ -29,7 +26,7 @@ const OrderItemSchema = new Schema(
       required: 'Se requiere cantidad',
     },
   },
-  { _id: false, versionKey: false },
+  { _id: false, versionKey: false }
 );
 
 const OrderSchema = new Schema(
@@ -65,12 +62,9 @@ const OrderSchema = new Schema(
       },
     },
   },
-  { versionKey: false },
+  { versionKey: false }
 );
 
 const Order = mongoose.model('Order', OrderSchema);
 
-export {
-  orderStatus,
-  paymentTypes, Order,
-};
+export { orderStatus, paymentTypes, Order };

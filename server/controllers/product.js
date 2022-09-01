@@ -1,6 +1,6 @@
 import Formidable from 'formidable';
 import fs from 'fs';
-import ProductModel from '../models/Product';
+import { ProductModel } from '../models/Product';
 
 const list = (req, res) => {
   const { name, category } = req.query;
@@ -21,8 +21,7 @@ const list = (req, res) => {
 
 const detail = (req, res) => {
   const { id } = req.params;
-  ProductModel
-    .findOne({ _id: id })
+  ProductModel.findOne({ _id: id })
     .then((orders) => res.json(orders))
     .catch((error) => res.status(500).json({ message: 'internal server error', error }));
 };
@@ -51,7 +50,6 @@ const create = (req, res) => {
 };
 
 const update = (req, res) => {
-  // eslint-disable-next-line max-len
   ProductModel.findOneAndUpdate({ name: req.body.name }, req.body, (err) => res.status(500).json(err));
   res.status(200);
 };
